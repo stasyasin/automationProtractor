@@ -1,0 +1,23 @@
+{
+  "testScenarioParameters": {
+    "environment": {
+      "value": "LOCAL"
+    },
+    "loginParameters": {
+      "userId": {
+        "value": "stanislavAutomationProtractor"
+      },
+      "password": {
+        "value": "Passw0rd18A!!"
+      }
+    },
+    "repositoryParameters": {
+      "repName": {
+        "value": "automationProtractor"
+      },
+      "repOwner": {
+        "value": "stasyasin"
+      }
+    }
+  }
+}

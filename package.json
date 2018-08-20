@@ -1,0 +1,50 @@
+{
+  "name": "automationProtractor",
+  "version": "0.0.1",
+  "author": "sdemianets",
+  "homepage": "https://github.com/stasyasin/automationProtractor",
+  "private": true,
+  "scripts": {
+    "e2e-build": "cd scripts && build.sh",
+    "e2e-run": "cd scripts && run.sh",
+    "e2e-debug": "cd scripts && debug.sh",
+    "e2e-report": "cd scripts && report.sh",
+    "e2e": "cd scripts && build.sh && run.sh && report.sh",
+    "webdriver:start": "webdriver-manager start --seleniumPort 4444",
+    "webdriver:update": "webdriver-manager update",
+    "sleep": "sleep 10",
+    "prot:run": "cd scripts && protractor ../qaprotractor.conf.js",
+    "e2e-conc": "concurrently \"npm run webdriver:update && npm run webdriver:start\" \"npm run sleep && npm run prot:run\" --kill-others",
+    "e2e-win": "cd scripts && npm run e2e-build && npm run e2e-conc"
+  },
+  "devDependencies": {
+    "protractor": "^5.2.2",
+    "typescript": "~2.6.2",
+    "xmlhttprequest": "1.8.0",
+    "tslint": "^5.6.0",
+    "@types/jasmine": "^2.8.8",
+    "@types/node": "^8.10.20",
+    "@types/selenium-webdriver": "2.53.36",
+    "jasmine": "^2.8.0",
+    "eslint": "^0.22.1",
+    "protractor-html-screenshot-reporter": "0.0.21",
+    "protractor-http-mock": "~0.9.1",
+    "protractor-jasmine2-html-reporter": "0.0.7",
+    "require-dir": "0.3.2",
+    "run-sequence": "^1.2.2",
+    "fs-extra": "^4.0.3",
+    "xhr": "2.4.1",
+    "moment": "^2.22.2",
+    "concurrently": "^4.0.1",
+    "prettier": "^1.13.7"
+  },
+  "description": "Automation Protractor framework",
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "useTabs": false,
+    "tabWidth": 2,
+    "semi": true,
+    "bracketSpacing": true
+  }
+}
