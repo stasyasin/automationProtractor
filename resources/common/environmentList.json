@@ -1,6 +1,5 @@
 {
   "OVER": {
-    "override": "true",
     "overValue": "PROD"
   },
   "PROD": {

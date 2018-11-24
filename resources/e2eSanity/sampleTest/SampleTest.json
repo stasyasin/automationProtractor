@@ -1,8 +1,5 @@
 {
   "testScenarioParameters": {
-    "environment": {
-      "value": "LOCAL"
-    },
     "loginParameters": {
       "userId": {
         "value": "stanislavAutomationProtractor"

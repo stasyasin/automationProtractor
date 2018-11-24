@@ -1,5 +1,5 @@
-import {TestSuite} from '../dataObjects/TestSuite';
-import {Campaign} from '../dataObjects/Campaign';
+import { TestSuite } from '../dataObjects/TestSuite';
+import { Campaign } from '../dataObjects/Campaign';
 
 let fs = require('fs');
 let path = require('path');
@@ -67,7 +67,7 @@ export function toHtml(campaign: Campaign): string {
   html += '<td width="20" height="40"> Test Status</td>';
   html += '<td width="20" height="40"> Link</td>';
   html += '<td width="20" height="40"> Comment</td></tr>';
-  campaign.testSuites.forEach(function (testSuite) {
+  campaign.testSuites.forEach(function(testSuite) {
     if (testSuite.status === 'Passed') {
       html += '<tr class="passed" style="text-align: center;">';
     } else {

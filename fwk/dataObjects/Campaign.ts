@@ -1,4 +1,4 @@
-import {TestSuite} from './TestSuite';
+import { TestSuite } from './TestSuite';
 
 /**
  * Campaign class, to use in global .html report

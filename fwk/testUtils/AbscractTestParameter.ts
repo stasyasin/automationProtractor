@@ -1,4 +1,4 @@
-import {Environment} from '../dataObjects/Environment';
+import { Environment } from '../dataObjects/Environment';
 import fs = require('fs-extra');
 
 /**
@@ -18,21 +18,19 @@ export class AbstractTestParameter {
 
   protected static initEnvironment(): void {
     let that = this;
-    let env = this.data['testScenarioParameters']['environment']['value'];
-    let confFile: string = '../resources/common/environmentList.json';
-    fs.readFile(confFile, {encoding: 'utf-8'}, function (err: any, r: string): void {
+    let envConfFile: string = '../resources/common/environmentList.json';
+    fs.readFile(envConfFile, { encoding: 'utf-8' }, function(err: any, r: string): void {
       if (err) {
         throw Error(err);
       }
-      let data = JSON.parse(r);
-      let overValue = (data['OVER'] !== undefined && data['OVER']['override'] !== undefined && data['OVER']['override'] === 'true') ?
-        data['OVER']['overValue'] : env;
+      let envData = JSON.parse(r);
+      let overValue = (envData['OVER'] !== undefined) ? envData['OVER']['overValue'] : null;
       that.environment.envName = overValue;
-      for (let t in data) {
+      for (let t in envData) {
         if (t === that.environment.envName) {
-          that.environment.url = data[t]['url'];
-          that.environment.userID = data[t]['userID'];
-          that.environment.password = data[t]['password'];
+          that.environment.url = envData[t]['url'];
+          that.environment.userID = envData[t]['userID'];
+          that.environment.password = envData[t]['password'];
         }
       }
     });
@@ -42,7 +40,7 @@ export class AbstractTestParameter {
    * Common method to include all necessary init methods before test.
    */
   public static initCommonParameters(): void {
-    this.data = JSON.parse(fs.readFileSync(this.confFile.confFile, 'utf-8'));
+    this.data = JSON.parse(fs.readFileSync(this.confFile, 'utf-8'));
     this.timeStamp = new Date();
     this.initEnvironment();
   }

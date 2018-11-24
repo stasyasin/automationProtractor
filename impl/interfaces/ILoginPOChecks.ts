@@ -1,5 +1,5 @@
 import * as webDriver from 'selenium-webdriver';
-import {IAbstractChecks} from './IAbstractChecks';
+import { IAbstractChecks } from './IAbstractChecks';
 
 export interface ILoginPOChecks extends IAbstractChecks {
 

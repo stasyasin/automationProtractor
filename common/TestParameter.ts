@@ -1,7 +1,5 @@
-import {User} from './dataObject/User';
-import {DateUtils} from '../fwk/utils/DateUtils';
 import fs = require('fs-extra');
-import {AbstractTestParameter} from '../fwk/testUtils/AbscractTestParameter';
+import { AbstractTestParameter } from '../fwk/testUtils/AbscractTestParameter';
 
 /**
  * TestParameter class to init all necessary parameters
@@ -9,26 +7,16 @@ import {AbstractTestParameter} from '../fwk/testUtils/AbscractTestParameter';
  * + to get any parameter through getParam method
  */
 export class TestParameter extends AbstractTestParameter {
-  static _user: User = null;
 
 
   /**
-   * Common method to include all necessary init methods before test.
+   * Override Method to add additional init instances if necessary here
    */
-  public static initCommonParameters(): void {
-    this.data = JSON.parse(fs.readFileSync(this.confFile.confFile, 'utf-8'));
-    this.timeStamp = new Date();
-    this.initEnvironment();
-    this.initUser();
-  }
-
-  /**
-   * method to initialize user
-   */
-  private static initUser(): void {
-    this._user = new User('stanislavAutomationProtractor+' +
-      DateUtils.convertDateToShortString(this.timeStamp) + '@gmail.com');
-  }
+  // public static initCommonParameters(): void {
+  //   this.data = JSON.parse(fs.readFileSync(this.confFile, 'utf-8'));
+  //   this.timeStamp = new Date();
+  //   this.initEnvironment();
+  // }
 
   public static getUserId(): string {
     if (typeof this.data['testScenarioParameters']['loginParameters']['userId'] === undefined) {

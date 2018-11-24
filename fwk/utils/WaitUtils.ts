@@ -1,5 +1,5 @@
-import {AbstractChecks} from '../abstractPO/AbstractChecks';
-import {browser, by, element, ElementFinder} from 'protractor';
+import { AbstractChecks } from '../abstractPO/AbstractChecks';
+import { browser, by, element, ElementFinder } from 'protractor';
 import protractor = require('protractor');
 
 const globalWaitTimeout: number = 30 * 1000;

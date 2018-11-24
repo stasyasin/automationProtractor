@@ -1,8 +1,8 @@
-import {by, element, protractor} from 'protractor';
-import {IMainPOActions} from '../interfaces/IMainPOActions';
-import {AbstractActions} from '../../fwk/abstractPO/AbstractActions';
-import {MainPOLocators} from '../locators/MainPOLocators';
-import {CommonPOLocators} from '../locators/CommonPOLocators';
+import { by, element, protractor } from 'protractor';
+import { IMainPOActions } from '../interfaces/IMainPOActions';
+import { AbstractActions } from '../../fwk/abstractPO/AbstractActions';
+import { MainPOLocators } from '../locators/MainPOLocators';
+import { CommonPOLocators } from '../locators/CommonPOLocators';
 
 const timeout = global['implicitlyWait'];
 

@@ -1,5 +1,5 @@
-import {By} from 'selenium-webdriver';
-import {IAbstractActions} from './IAbstractActions';
+import { By } from 'selenium-webdriver';
+import { IAbstractActions } from './IAbstractActions';
 
 export interface ILoginPOActions extends IAbstractActions {
 

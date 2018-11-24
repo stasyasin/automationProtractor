@@ -1,5 +1,5 @@
 import * as protractor from 'protractor';
-import {browser, element, ElementFinder} from 'protractor';
+import { browser, element, ElementFinder } from 'protractor';
 import * as webdriver from 'selenium-webdriver';
 import * as webDriver from 'selenium-webdriver';
 import ILocation = webdriver.ILocation;
@@ -127,9 +127,9 @@ export class AbstractChecks {
   static goToWebElement(object: protractor.ElementFinder, callback?: () => void): any {
     let promise = browser.executeScript('arguments[0].focus()', object.getWebElement());
     if (typeof callback === 'function') {
-      promise.then(function () {
+      promise.then(function() {
         callback();
-      }, function (err) {
+      }, function(err) {
         console.error(err);
       });
     }
@@ -175,14 +175,14 @@ export class AbstractChecks {
     return browser.getCurrentUrl();
   }
 
-    /**
-     * This method will return number of elements
-     * @param locator
-     * @return {wdpromise.Promise<number>}
-     */
-    static getElementNumber(locator: By): webDriver.promise.Promise<number> {
-        return element.all(locator).count();
-    }
+  /**
+   * This method will return number of elements
+   * @param locator
+   * @return {wdpromise.Promise<number>}
+   */
+  static getElementNumber(locator: By): webDriver.promise.Promise<number> {
+    return element.all(locator).count();
+  }
 
 
 }

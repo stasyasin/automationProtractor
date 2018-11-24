@@ -1,9 +1,9 @@
-import {by, element} from 'protractor';
+import { by, element } from 'protractor';
 import * as webDriver from 'selenium-webdriver';
-import {AbstractChecks} from '../../fwk/abstractPO/AbstractChecks';
-import {IMainPOChecks} from '../interfaces/IMainPOChecks';
-import {WaitUtils} from '../../fwk/utils/WaitUtils';
-import {CommonPOLocators} from '../locators/CommonPOLocators';
+import { AbstractChecks } from '../../fwk/abstractPO/AbstractChecks';
+import { IMainPOChecks } from '../interfaces/IMainPOChecks';
+import { WaitUtils } from '../../fwk/utils/WaitUtils';
+import { CommonPOLocators } from '../locators/CommonPOLocators';
 
 export class MainPOChecks extends AbstractChecks implements IMainPOChecks {
 

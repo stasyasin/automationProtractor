@@ -1,7 +1,7 @@
 import * as protractor from 'protractor';
-import {browser, ElementFinder} from 'protractor';
+import { browser, ElementFinder } from 'protractor';
 import * as webDriver from 'selenium-webdriver';
-import {WaitUtils} from '../utils/WaitUtils';
+import { WaitUtils } from '../utils/WaitUtils';
 import path = require('path');
 
 export class AbstractActions {
@@ -49,7 +49,7 @@ export class AbstractActions {
    */
   static dragAndDropToCoordinates(dragElement: ElementFinder, x: number, y: number): void {
     browser.actions()
-      .dragAndDrop(dragElement.getWebElement(), {x, y})
+      .dragAndDrop(dragElement.getWebElement(), { x, y })
       .mouseUp()
       .perform();
   }
@@ -68,7 +68,7 @@ export class AbstractActions {
 
     browser.actions()
       .mouseDown(swipeElem.getWebElement())
-      .mouseMove(swipeElem.getWebElement(), {x: x, y: y})
+      .mouseMove(swipeElem.getWebElement(), { x: x, y: y })
       .mouseUp()
       .perform();
   }
@@ -90,7 +90,7 @@ export class AbstractActions {
 
     for (let i = 0; i < 8; i++) {
       browser.actions()
-        .mouseMove({x: x / 8, y: y}).perform();
+        .mouseMove({ x: x / 8, y: y }).perform();
     }
 
     browser.actions()
@@ -106,7 +106,7 @@ export class AbstractActions {
    */
   static clickToCoordinates(baseElement: ElementFinder, x: number, y: number): void {
     browser.actions()
-      .mouseMove(baseElement.getWebElement(), {x, y})
+      .mouseMove(baseElement.getWebElement(), { x, y })
       .click()
       .perform();
   }
@@ -195,7 +195,7 @@ export class AbstractActions {
    * @param index
    */
   static switchToWindow(index: number): void {
-    browser.getAllWindowHandles().then(function (handles) {
+    browser.getAllWindowHandles().then(function(handles) {
       browser.switchTo().window(handles[index]);
     });
     WaitUtils.wait(1);

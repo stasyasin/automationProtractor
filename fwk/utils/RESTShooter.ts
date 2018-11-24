@@ -6,7 +6,7 @@ export class RESTShooter {
   public static syncMakeRequest(method, url, params?, user?, password?) {
     xhr.open(method, url, false, user, password);
     xhr.contentType = 'application/json';
-    xhr.onload = function () {
+    xhr.onload = function() {
     };
     xhr.send(params);
     return xhr;

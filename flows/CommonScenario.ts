@@ -1,24 +1,23 @@
-import testPageLoader = require ('../fwk/testUtils/TestPageLoader');
-import {browser} from 'protractor';
-import {MainPOChecks} from '../impl/checks/MainPOChecks';
-import {TestParameter} from '../common/TestParameter';
-import {LoginPOChecks} from '../impl/checks/LoginPOChecks';
-import {LoginPOActions} from '../impl/actions/LoginPOActions';
-import {MainPOActions} from '../impl/actions/MainPOActions';
+import { browser } from 'protractor';
+import { MainPOChecks } from '../impl/checks/MainPOChecks';
+import { TestParameter } from '../common/TestParameter';
+import { LoginPOChecks } from '../impl/checks/LoginPOChecks';
+import { LoginPOActions } from '../impl/actions/LoginPOActions';
+import { MainPOActions } from '../impl/actions/MainPOActions';
+import fs = require('fs');
 
 const timeout = global['implicitlyWait'];
 
 export abstract class CommonScenario {
 
-  public launcher: testPageLoader.TestPageLoader;
-  public _isLoad: boolean;
+  private environmentList: string = '../resources/common/environmentList.json';
+  private readonly testParameterFilePath: string;
 
-  constructor(configFilePath: string) {
-    this.launcher = new testPageLoader.TestPageLoader(configFilePath);
-    this._isLoad = false;
+  constructor(testParameterFilePath: string) {
+    this.testParameterFilePath = testParameterFilePath;
   }
 
-  abstract initValues(startPage);
+  abstract initValues(testParameterFilePath);
 
   checkTestGoals(): void {
   }
@@ -29,12 +28,10 @@ export abstract class CommonScenario {
   pageSetup(): void {
     beforeAll(() => {
       // Fill TestParameter object
-      this.initValues(this.launcher);
-      // Open Start page using URL from TestParameter
+      this.initValues(this.testParameterFilePath);
+      // Open Start page using URL from EnvironmentList
       browser.ignoreSynchronization = true;
-      if (!this._isLoad) {
-        this.launcher.loadPage();
-      }
+      this.loadPage();
     });
 
     it('Check Start Page was Opened', (done) => {
@@ -42,6 +39,14 @@ export abstract class CommonScenario {
       expect(browser.getTitle()).toBeDefined();
       done();
     });
+  }
+
+  private loadPage() {
+    let dataEnv = JSON.parse(fs.readFileSync(this.environmentList, 'utf-8'));
+    let overValue = (dataEnv['OVER'] !== undefined) ?
+      dataEnv['OVER']['overValue'] : null;
+    let url = (overValue !== null) ? dataEnv[overValue]['url'] : null;
+    browser.get(url);
   }
 
   performLogin(): void {

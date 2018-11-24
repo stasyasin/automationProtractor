@@ -1,4 +1,4 @@
-import {IAbstractActions} from './IAbstractActions';
+import { IAbstractActions } from './IAbstractActions';
 
 export interface IMainPOActions extends IAbstractActions {
 

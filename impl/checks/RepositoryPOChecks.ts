@@ -1,9 +1,9 @@
-import {element} from 'protractor';
+import { element } from 'protractor';
 import * as webDriver from 'selenium-webdriver';
-import {AbstractChecks} from '../../fwk/abstractPO/AbstractChecks';
-import {WaitUtils} from '../../fwk/utils/WaitUtils';
-import {IRepositoryPOChecks} from '../interfaces/IRepositoryPOChecks';
-import {RepositoryPOLocators} from '../locators/RepositoryPOLocators';
+import { AbstractChecks } from '../../fwk/abstractPO/AbstractChecks';
+import { WaitUtils } from '../../fwk/utils/WaitUtils';
+import { IRepositoryPOChecks } from '../interfaces/IRepositoryPOChecks';
+import { RepositoryPOLocators } from '../locators/RepositoryPOLocators';
 
 export class RepositoryPOChecks extends AbstractChecks implements IRepositoryPOChecks {
 

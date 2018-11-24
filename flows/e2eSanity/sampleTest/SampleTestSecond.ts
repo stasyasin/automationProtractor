@@ -1,8 +1,8 @@
-import {TestParameter} from '../../../common/TestParameter';
-import {MainPOActions} from '../../../impl/actions/MainPOActions';
-import {CommonScenario} from '../../CommonScenario';
-import {RepositoryPOChecks} from '../../../impl/checks/RepositoryPOChecks';
-import {AbstractChecks} from '../../../fwk/abstractPO/AbstractChecks';
+import { TestParameter } from '../../../common/TestParameter';
+import { MainPOActions } from '../../../impl/actions/MainPOActions';
+import { CommonScenario } from '../../CommonScenario';
+import { RepositoryPOChecks } from '../../../impl/checks/RepositoryPOChecks';
+import { AbstractChecks } from '../../../fwk/abstractPO/AbstractChecks';
 
 export class SampleTestSecond extends CommonScenario {
 
