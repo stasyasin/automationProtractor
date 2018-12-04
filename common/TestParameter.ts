@@ -1,4 +1,4 @@
-import fs = require('fs-extra');
+// import fs = require('fs-extra');
 import { AbstractTestParameter } from '../fwk/testUtils/AbscractTestParameter';
 
 /**
@@ -7,7 +7,6 @@ import { AbstractTestParameter } from '../fwk/testUtils/AbscractTestParameter';
  * + to get any parameter through getParam method
  */
 export class TestParameter extends AbstractTestParameter {
-
 
   /**
    * Override Method to add additional init instances if necessary here

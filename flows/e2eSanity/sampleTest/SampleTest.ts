@@ -8,12 +8,11 @@ export class SampleTest extends CommonScenario {
 
   public static testName: string = 'SampleTest';
 
-
   constructor() {
     super('../resources/e2eSanity/sampleTest/SampleTest.json');
   }
 
-  initValues(configContent) {
+  initValues(configContent: string): void {
     TestParameter.confFile = configContent;
     TestParameter.initCommonParameters();
   }

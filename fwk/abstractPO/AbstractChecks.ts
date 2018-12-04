@@ -1,7 +1,5 @@
-import * as protractor from 'protractor';
 import { browser, element, ElementFinder } from 'protractor';
 import * as webdriver from 'selenium-webdriver';
-import * as webDriver from 'selenium-webdriver';
 import ILocation = webdriver.ILocation;
 import By = webdriver.By;
 
@@ -105,32 +103,31 @@ export class AbstractChecks {
    * @param elem
    * @return {wdpromise.Promise<boolean>}
    */
-  static getCheckboxState(elem: ElementFinder): webDriver.promise.Promise<boolean> {
+  static getCheckboxState(elem: ElementFinder): webdriver.promise.Promise<boolean> {
     return elem.isSelected();
   }
 
   /**
-   * This method will return Element enabled status. Return promise true if element is enabled, promsie false when disabled(inactive)
+   * This method will return Element enabled status. Return promise true if element is enabled,
+   * promsie false when disabled(inactive)
    * @param locator
    * @return {wdpromise.Promise<boolean>}
    */
-  static getElementEnabledStatus(locator: By): webDriver.promise.Promise<boolean> {
-    let checkbox: ElementFinder = element.all(locator).get(0);
+  static getElementEnabledStatus(locator: By): webdriver.promise.Promise<boolean> {
+    const checkbox: ElementFinder = element.all(locator).get(0);
     return checkbox.isEnabled();
   }
 
   /**
    * Method goToWebElement, scroll to the required item, returns a promise or call the call back if specified
-   * @param {protractor.ElementFinder} element The element to focus on
-   * @param {Function} optional callback The callback to call after we focus on the object
+   * @param object element The element to focus on
+   * @param callback optional callback The callback to call after we focus on the object
    */
-  static goToWebElement(object: protractor.ElementFinder, callback?: () => void): any {
-    let promise = browser.executeScript('arguments[0].focus()', object.getWebElement());
+  static goToWebElement(object: ElementFinder, callback?: () => void): any {
+    const promise = browser.executeScript('arguments[0].focus()', object.getWebElement());
     if (typeof callback === 'function') {
-      promise.then(function() {
+      promise.then(() => {
         callback();
-      }, function(err) {
-        console.error(err);
       });
     }
     else {
@@ -180,9 +177,7 @@ export class AbstractChecks {
    * @param locator
    * @return {wdpromise.Promise<number>}
    */
-  static getElementNumber(locator: By): webDriver.promise.Promise<number> {
+  static getElementNumber(locator: By): webdriver.promise.Promise<number> {
     return element.all(locator).count();
   }
-
-
 }

@@ -8,7 +8,8 @@ import { CommonPOLocators } from '../locators/CommonPOLocators';
 export class MainPOChecks extends AbstractChecks implements IMainPOChecks {
 
   isStartProjectLinkDisplayed(): webDriver.promise.Promise<boolean> {
-    WaitUtils.waitForElementPresent(element.all(by.cssContainingText(CommonPOLocators.LOC_ANY_BODY_LINK, 'Start a project')).get(0));
+    WaitUtils.waitForElementPresent(element.all(by.cssContainingText(
+      CommonPOLocators.LOC_ANY_BODY_LINK, 'Start a project')).get(0));
     return AbstractChecks.isElementDisplayed(element.all(by.cssContainingText(
       CommonPOLocators.LOC_ANY_BODY_LINK, 'Start a project')).get(0));
   }

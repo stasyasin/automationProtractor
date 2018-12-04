@@ -1,33 +1,33 @@
 import { TestSuite } from '../dataObjects/TestSuite';
 import { Campaign } from '../dataObjects/Campaign';
 
-let fs = require('fs');
-let path = require('path');
+const fs = require('fs');
+const path = require('path');
 
 /**
  * Generate a globalReport for
  */
 export function generateGlobalReports(): void {
   // took last campaign folder
-  let campaignName: string = getLastCampaignFolderName('Campaign-', './../reports');
+  const campaignName: string = getLastCampaignFolderName('Campaign-', './../reports');
   // parse all html files in campaign folder. Note: except globalReport.html and screenshots folder
-  let testSuites: TestSuite[] = [];
+  const testSuites: TestSuite[] = [];
   fs.readdirSync('./../reports/' + campaignName).filter((file) => {
     if ((file !== 'screenshots') && (file !== 'globalReport.html')) {
-      let content = fs.readFileSync('./../reports/' + campaignName + '/' + file, 'utf8').toString();
-      let name: string = content.split('<header><h2>')[1].split(' - ')[0];
-      let tests: string = content.split('Tests: <strong>')[1].split('</strong>')[0];
-      let skipped: string = content.split('Skipped: <strong>')[1].split('</strong>')[0];
-      let failures: string = content.split('Failures: <strong>')[1].split('</strong>')[0];
-      let time: string = content.split(name + ' - ')[1].split('</h2>')[0];
-      let link: string = file;
-      let testSuite: TestSuite = new TestSuite(name, tests, skipped, failures, time, link);
+      const content = fs.readFileSync('./../reports/' + campaignName + '/' + file, 'utf8').toString();
+      const name: string = content.split('<header><h2>')[1].split(' - ')[0];
+      const tests: string = content.split('Tests: <strong>')[1].split('</strong>')[0];
+      const skipped: string = content.split('Skipped: <strong>')[1].split('</strong>')[0];
+      const failures: string = content.split('Failures: <strong>')[1].split('</strong>')[0];
+      const time: string = content.split(name + ' - ')[1].split('</h2>')[0];
+      const link: string = file;
+      const testSuite: TestSuite = new TestSuite(name, tests, skipped, failures, time, link);
       testSuites.push(testSuite);
     }
   });
-  let campaign: Campaign = new Campaign(campaignName, testSuites);
+  const campaign: Campaign = new Campaign(campaignName, testSuites);
   // creating html file
-  let htmlText = toHtml(campaign);
+  const htmlText = toHtml(campaign);
 
   // writing html file
   fs.writeFileSync('./../reports/' + campaignName + '/' + 'globalReport.html', htmlText);
@@ -35,17 +35,16 @@ export function generateGlobalReports(): void {
 }
 
 export function getLastCampaignFolderName(baseDirName: string, srcPath: string): string {
-  let campaign_dir_names = [];
+  const campaignDirNames = [];
 
   fs.readdirSync(srcPath).filter((file) => {
     if (fs.statSync(path.join(srcPath, file)).isDirectory() && file.startsWith(baseDirName)) {
-      campaign_dir_names.push(file);
+      campaignDirNames.push(file);
     }
   });
-  campaign_dir_names.sort();
-  return campaign_dir_names[campaign_dir_names.length - 1];
+  campaignDirNames.sort();
+  return campaignDirNames[campaignDirNames.length - 1];
 }
-
 
 export function toHtml(campaign: Campaign): string {
   let html = '<!DOCTYPE html><html><head lang=en>';
@@ -55,7 +54,8 @@ export function toHtml(campaign: Campaign): string {
   let totalFailed: number = 0;
   html += injectClasses();
   html += '<meta charset=UTF-8><title>' + campaign.name + '</title><body>';
-  html += '<div><p><table class= "summaryTable" cellspacing="0" cellpadding="0" border="1" align="center" style="width:740px;"><tr><td>' +
+  html += '<div><p><table class= "summaryTable" cellspacing="0" cellpadding="0" border="1"' +
+    ' align="center" style="width:740px;"><tr><td>' +
     campaign.name + '</td></tr></table>';
   html += '<table cellspacing="0" cellpadding="0" border="1" align="center" style="width:740px;">';
   html += '<tr class="headerTable" style="text-align: center;">';
@@ -67,7 +67,7 @@ export function toHtml(campaign: Campaign): string {
   html += '<td width="20" height="40"> Test Status</td>';
   html += '<td width="20" height="40"> Link</td>';
   html += '<td width="20" height="40"> Comment</td></tr>';
-  campaign.testSuites.forEach(function(testSuite) {
+  campaign.testSuites.forEach((testSuite) => {
     if (testSuite.status === 'Passed') {
       html += '<tr class="passed" style="text-align: center;">';
     } else {
@@ -105,7 +105,7 @@ export function toHtml(campaign: Campaign): string {
 }
 
 export function injectClasses(): string {
-  let classes = '<style type="text/css">' +
+  const classes = '<style type="text/css">' +
     '.passed {background-color: #ADFF2F;}' +
     '.summaryTable {background-color: #C0C0C0;font-weight: bold;}' +
     '.headerTable {background-color: #C0C0C0;font-weight: bold;}' +
@@ -114,4 +114,3 @@ export function injectClasses(): string {
 }
 
 generateGlobalReports();
-

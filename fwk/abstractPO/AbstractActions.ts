@@ -10,16 +10,16 @@ export class AbstractActions {
    * static scrollAndClickElement function
    * focus to the element, wait that element becomes to be clickable and click
    * @param elem the locator for the button
-   * @param {number=} opt_timeout How long to wait for the condition to be true.
-   * @param {string=} opt_message An optional message to use if the wait times
+   * @param {number=} optTimeout How long to wait for the condition to be true.
+   * @param {string=} optMessage An optional message to use if the wait times
    */
-  static scrollAndClickElement(elem: ElementFinder, timeout?: number, opt_message?: string): void {
-    const timeoutToWait = timeout || global['implicitlyWait'] || undefined;
+  static scrollAndClickElement(elem: ElementFinder, optTimeout?: number, optMessage?: string): void {
+    const timeoutToWait = optTimeout || global['implicitlyWait'] || undefined;
     // navigate to element
     browser.actions()
       .mouseMove(elem.getWebElement())
       .perform();
-    browser.wait(protractor.ExpectedConditions.elementToBeClickable(elem), timeoutToWait, opt_message).then(() => {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(elem), timeoutToWait, optMessage).then(() => {
       elem.click();
     });
   }
@@ -127,14 +127,14 @@ export class AbstractActions {
    * This method fill param text to the Element.
    * @param elem
    * @param text
-   * @param timeout
-   * @param opt_message
+   * @param optTimeout
+   * @param optMessage
    * @return boolean
    */
   static fillElementInput(elem: ElementFinder, text: string,
-                          timeout?: number, opt_message?: string): webDriver.promise.Promise<boolean> {
-    const timeoutToWait = timeout || global['implicitlyWait'] || undefined;
-    return browser.wait(protractor.ExpectedConditions.presenceOf(elem), timeoutToWait, opt_message).then(() => {
+                          optTimeout?: number, optMessage?: string): webDriver.promise.Promise<boolean> {
+    const timeoutToWait = optTimeout || global['implicitlyWait'] || undefined;
+    return browser.wait(protractor.ExpectedConditions.presenceOf(elem), timeoutToWait, optMessage).then(() => {
       return elem.clear().then(() => {
         return elem.sendKeys(text).then(() => {
           return elem.getAttribute('value').then((txt) => {
@@ -149,14 +149,14 @@ export class AbstractActions {
    * This method fill param text to the Select Element.
    * @param elem
    * @param text
-   * @param timeout
-   * @param opt_message
+   * @param optTimeout
+   * @param optMessage
    * @return boolean
    */
   static fillElementSelect(elem: ElementFinder, text: string,
-                           timeout?: number, opt_message?: string): webDriver.promise.Promise<boolean> {
-    const timeoutToWait = timeout || global['implicitlyWait'] || undefined;
-    return browser.wait(protractor.ExpectedConditions.presenceOf(elem), timeoutToWait, opt_message).then(() => {
+                           optTimeout?: number, optMessage?: string): webDriver.promise.Promise<boolean> {
+    const timeoutToWait = optTimeout || global['implicitlyWait'] || undefined;
+    return browser.wait(protractor.ExpectedConditions.presenceOf(elem), timeoutToWait, optMessage).then(() => {
       return elem.sendKeys(text).then(() => {
         return elem.getAttribute('value').then((txt) => {
           return txt === text;
@@ -178,7 +178,7 @@ export class AbstractActions {
 
     // upload image
     WaitUtils.wait(2);
-    let absolutePath = path.resolve(__dirname, fileToUpload);
+    const absolutePath = path.resolve(__dirname, fileToUpload);
 
     // Unhide file input
     browser.executeScript('arguments[0].style.visibility = "visible"; arguments[0].style.height = "1px";' +
@@ -195,7 +195,7 @@ export class AbstractActions {
    * @param index
    */
   static switchToWindow(index: number): void {
-    browser.getAllWindowHandles().then(function(handles) {
+    browser.getAllWindowHandles().then((handles) => {
       browser.switchTo().window(handles[index]);
     });
     WaitUtils.wait(1);

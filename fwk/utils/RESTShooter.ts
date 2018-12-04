@@ -1,13 +1,12 @@
-let XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
-let xhr = new XMLHttpRequest();
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+const xhr = new XMLHttpRequest();
 
 export class RESTShooter {
 
-  public static syncMakeRequest(method, url, params?, user?, password?) {
+  public static syncMakeRequest(method: any, url: any, params?: any, user?: any, password?: any): void {
     xhr.open(method, url, false, user, password);
     xhr.contentType = 'application/json';
-    xhr.onload = function() {
-    };
+    xhr.onload = (): any => {};
     xhr.send(params);
     return xhr;
   }

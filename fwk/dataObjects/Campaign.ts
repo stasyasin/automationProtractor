@@ -7,7 +7,6 @@ export class Campaign {
   name: string;
   testSuites: TestSuite[];
 
-
   constructor(name: string, testSuites: TestSuite[]) {
     this.name = name;
     this.testSuites = testSuites;

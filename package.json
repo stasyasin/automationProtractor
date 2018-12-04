@@ -5,6 +5,7 @@
   "homepage": "https://github.com/stasyasin/automationProtractor",
   "private": true,
   "scripts": {
+    "lint": "tslint -c tslint.json '**/**/*.ts'",
     "e2e-build": "cd scripts && build.sh",
     "e2e-run": "cd scripts && run.sh",
     "e2e-debug": "cd scripts && debug.sh",

@@ -17,20 +17,19 @@ export class AbstractTestParameter {
    */
 
   protected static initEnvironment(): void {
-    let that = this;
-    let envConfFile: string = '../resources/common/environmentList.json';
-    fs.readFile(envConfFile, { encoding: 'utf-8' }, function(err: any, r: string): void {
+    const envConfFile: string = '../resources/common/environmentList.json';
+    fs.readFile(envConfFile, { encoding: 'utf-8' }, (err: any, r: string): void => {
       if (err) {
         throw Error(err);
       }
-      let envData = JSON.parse(r);
-      let overValue = (envData['OVER'] !== undefined) ? envData['OVER']['overValue'] : null;
-      that.environment.envName = overValue;
-      for (let t in envData) {
-        if (t === that.environment.envName) {
-          that.environment.url = envData[t]['url'];
-          that.environment.userID = envData[t]['userID'];
-          that.environment.password = envData[t]['password'];
+      const envData = JSON.parse(r);
+      const overValue = (envData['OVER'] !== undefined) ? envData['OVER']['overValue'] : null;
+      this.environment.envName = overValue;
+      for (const t in envData) {
+        if (t === this.environment.envName) {
+          this.environment.url = envData[t]['url'];
+          this.environment.userID = envData[t]['userID'];
+          this.environment.password = envData[t]['password'];
         }
       }
     });

@@ -6,7 +6,7 @@ import { LoginPOActions } from '../impl/actions/LoginPOActions';
 import { MainPOActions } from '../impl/actions/MainPOActions';
 import fs = require('fs');
 
-const timeout = global['implicitlyWait'];
+const timeout: number = global['implicitlyWait'];
 
 export abstract class CommonScenario {
 
@@ -17,7 +17,7 @@ export abstract class CommonScenario {
     this.testParameterFilePath = testParameterFilePath;
   }
 
-  abstract initValues(testParameterFilePath);
+  abstract initValues(testParameterFilePath: string): void;
 
   checkTestGoals(): void {
   }
@@ -41,11 +41,11 @@ export abstract class CommonScenario {
     });
   }
 
-  private loadPage() {
-    let dataEnv = JSON.parse(fs.readFileSync(this.environmentList, 'utf-8'));
-    let overValue = (dataEnv['OVER'] !== undefined) ?
+  private loadPage(): void {
+    const dataEnv = JSON.parse(fs.readFileSync(this.environmentList, 'utf-8'));
+    const overValue = (dataEnv['OVER'] !== undefined) ?
       dataEnv['OVER']['overValue'] : null;
-    let url = (overValue !== null) ? dataEnv[overValue]['url'] : null;
+    const url = (overValue !== null) ? dataEnv[overValue]['url'] : null;
     browser.get(url);
   }
 
@@ -56,7 +56,8 @@ export abstract class CommonScenario {
     loginPOChecks.isSignInLinkDisplayed().then((elementDisplayed) => {
       expect(elementDisplayed).toBeTruthy('Sign In Link is not displayed, Login page was not loaded');
     });
-    loginPOActions.performLogin(TestParameter.environment.userID, TestParameter.environment.password); // possible TestParameter.getUserId(), TestParameter.getPassword() if want to take credentials from TestProperty json
+    // possible TestParameter.getUserId() if want to take credentials from TestProperty json
+    loginPOActions.performLogin(TestParameter.environment.userID, TestParameter.environment.password);
     mainPOChecks.isStartProjectLinkDisplayed().then((elementDisplayed) => {
       expect(elementDisplayed).toBeTruthy('Start Project link is not displayed, login was not successful');
     });

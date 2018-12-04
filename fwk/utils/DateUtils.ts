@@ -10,13 +10,13 @@ export class DateUtils {
   }
 
   public static getTomorrowDate(): Date {
-    let tomorrow = new Date();
+    const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     return tomorrow;
   }
 
   public static getAdjustedDate(day: number): Date {
-    let adjustedDate = new Date();
+    const adjustedDate = new Date();
     adjustedDate.setDate(adjustedDate.getDate() + day);
     return adjustedDate;
   }
