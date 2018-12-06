@@ -6,47 +6,33 @@ import { LoginPOActions } from '../impl/actions/LoginPOActions';
 import { MainPOActions } from '../impl/actions/MainPOActions';
 import fs = require('fs');
 
-const timeout: number = global['implicitlyWait'];
-
 export abstract class CommonScenario {
 
-  private environmentList: string = '../resources/common/environmentList.json';
   private readonly testParameterFilePath: string;
 
-  constructor(testParameterFilePath: string) {
+  constructor(testParameterFilePath?: string) {
     this.testParameterFilePath = testParameterFilePath;
   }
 
-  abstract initValues(testParameterFilePath: string): void;
+  abstract checkTestGoals(): void;
 
-  checkTestGoals(): void {
-  }
-
-  performTest(): void {
-  }
+  abstract performTest(): void;
 
   pageSetup(): void {
     beforeAll(() => {
       // Fill TestParameter object
-      this.initValues(this.testParameterFilePath);
+      TestParameter.setConfFile(this.testParameterFilePath);
+      TestParameter.initCommonParameters();
       // Open Start page using URL from EnvironmentList
       browser.ignoreSynchronization = true;
-      this.loadPage();
-    });
-
-    it('Check Start Page was Opened', (done) => {
+      browser.get(TestParameter.environment.url);
       // Check that browser opened URL
       expect(browser.getTitle()).toBeDefined();
-      done();
+      const loginPOChecks = new LoginPOChecks();
+      loginPOChecks.isSignInLinkDisplayed().then((elementDisplayed) => {
+        expect(elementDisplayed).toBeTruthy('Sign In Link is not displayed, Login page was not loaded');
+      });
     });
-  }
-
-  private loadPage(): void {
-    const dataEnv = JSON.parse(fs.readFileSync(this.environmentList, 'utf-8'));
-    const overValue = (dataEnv['OVER'] !== undefined) ?
-      dataEnv['OVER']['overValue'] : null;
-    const url = (overValue !== null) ? dataEnv[overValue]['url'] : null;
-    browser.get(url);
   }
 
   performLogin(): void {
@@ -84,7 +70,7 @@ export abstract class CommonScenario {
 
       this.performTest();
 
-      it('Check Goals of the tests', (done) => {
+      it('Perform Logout actions', (done) => {
         this.checkTestGoals();
         this.performLogOut();
         done();

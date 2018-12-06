@@ -12,11 +12,6 @@ export class SampleTest extends CommonScenario {
     super('../resources/e2eSanity/sampleTest/SampleTest.json');
   }
 
-  initValues(configContent: string): void {
-    TestParameter.confFile = configContent;
-    TestParameter.initCommonParameters();
-  }
-
   performTest(): void {
     it('Search repository with name/owner from TestParameters', (done) => {
       const mainPOActions = new MainPOActions();
