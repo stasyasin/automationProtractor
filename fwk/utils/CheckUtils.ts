@@ -3,7 +3,7 @@ import * as webdriver from 'selenium-webdriver';
 import ILocation = webdriver.ILocation;
 import By = webdriver.By;
 
-export class AbstractChecks {
+export class CheckUtils {
 
   /**
    * This method scroll to the element and take it Text

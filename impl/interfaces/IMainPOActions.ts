@@ -1,6 +1,5 @@
-import { IAbstractActions } from './IAbstractActions';
 
-export interface IMainPOActions extends IAbstractActions {
+export interface IMainPOActions {
 
   /**
    * This Method click on Logout button

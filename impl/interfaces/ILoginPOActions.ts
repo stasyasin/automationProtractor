@@ -1,7 +1,6 @@
 import { By } from 'selenium-webdriver';
-import { IAbstractActions } from './IAbstractActions';
 
-export interface ILoginPOActions extends IAbstractActions {
+export interface ILoginPOActions {
 
   /**
    * Method to click on SignIn link and wait email field present

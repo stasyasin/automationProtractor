@@ -1,7 +1,6 @@
 import * as webDriver from 'selenium-webdriver';
-import { IAbstractChecks } from './IAbstractChecks';
 
-export interface IRepositoryPOChecks extends IAbstractChecks {
+export interface IRepositoryPOChecks {
 
   /**
    * This method check that summary button is displayed

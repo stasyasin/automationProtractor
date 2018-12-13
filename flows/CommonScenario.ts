@@ -4,7 +4,6 @@ import { TestParameter } from '../common/TestParameter';
 import { LoginPOChecks } from '../impl/checks/LoginPOChecks';
 import { LoginPOActions } from '../impl/actions/LoginPOActions';
 import { MainPOActions } from '../impl/actions/MainPOActions';
-import fs = require('fs');
 
 export abstract class CommonScenario {
 
@@ -63,17 +62,15 @@ export abstract class CommonScenario {
     const testName = args[0];
     describe(testName, () => {
       this.pageSetup();
-      it('Perform Login actions', (done) => {
+      it('Perform Login actions', () => {
         this.performLogin();
-        done();
       });
 
       this.performTest();
 
-      it('Perform Logout actions', (done) => {
+      it('Check test goals && Perform Logout actions', () => {
         this.checkTestGoals();
         this.performLogOut();
-        done();
       });
     });
   }

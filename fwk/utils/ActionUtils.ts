@@ -1,10 +1,10 @@
 import * as protractor from 'protractor';
 import { browser, ElementFinder } from 'protractor';
 import * as webDriver from 'selenium-webdriver';
-import { WaitUtils } from '../utils/WaitUtils';
+import { WaitUtils } from './WaitUtils';
 import path = require('path');
 
-export class AbstractActions {
+export class ActionUtils {
 
   /**
    * static scrollAndClickElement function

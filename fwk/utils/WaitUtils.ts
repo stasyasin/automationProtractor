@@ -1,10 +1,9 @@
-import { AbstractChecks } from '../abstractPO/AbstractChecks';
 import { browser, by, element, ElementFinder } from 'protractor';
 import protractor = require('protractor');
 
 const globalWaitTimeout: number = 30 * 1000;
 
-export class WaitUtils extends AbstractChecks {
+export class WaitUtils {
   public static waitForElementNotPresent(elem: ElementFinder, timeoutSec?: number): void {
     const timeoutToWait = timeoutSec * 1000 || globalWaitTimeout;
     browser.wait(protractor.ExpectedConditions.not(protractor.ExpectedConditions.presenceOf(elem)), timeoutToWait,

@@ -11,8 +11,8 @@ echo "###########################################"
 ../node_modules/typescript/bin/tsc
 
 #Uncomment this command for debugging needs
-#echo "sleep 100"
+#echo "sleep 10"
 #echo "###########################################"
-#sleep 100
+#sleep 10
 
 

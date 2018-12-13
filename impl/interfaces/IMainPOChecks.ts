@@ -1,7 +1,6 @@
 import * as webDriver from 'selenium-webdriver';
-import { IAbstractChecks } from './IAbstractChecks';
 
-export interface IMainPOChecks extends IAbstractChecks {
+export interface IMainPOChecks {
 
   /**
    * This method check that Start Project button is displayed
