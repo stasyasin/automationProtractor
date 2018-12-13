@@ -1,6 +1,5 @@
 import * as protractor from 'protractor';
 import { browser, ElementFinder } from 'protractor';
-import * as webDriver from 'selenium-webdriver';
 import { WaitUtils } from './WaitUtils';
 import path = require('path');
 
@@ -132,15 +131,11 @@ export class ActionUtils {
    * @return boolean
    */
   static fillElementInput(elem: ElementFinder, text: string,
-                          optTimeout?: number, optMessage?: string): webDriver.promise.Promise<boolean> {
+                          optTimeout?: number, optMessage?: string): void {
     const timeoutToWait = optTimeout || global['implicitlyWait'] || undefined;
-    return browser.wait(protractor.ExpectedConditions.presenceOf(elem), timeoutToWait, optMessage).then(() => {
-      return elem.clear().then(() => {
-        return elem.sendKeys(text).then(() => {
-          return elem.getAttribute('value').then((txt) => {
-            return txt === text;
-          });
-        });
+    browser.wait(protractor.ExpectedConditions.presenceOf(elem), timeoutToWait, optMessage).then(() => {
+      elem.clear().then(() => {
+        elem.sendKeys(text).then();
       });
     });
   }
@@ -154,14 +149,10 @@ export class ActionUtils {
    * @return boolean
    */
   static fillElementSelect(elem: ElementFinder, text: string,
-                           optTimeout?: number, optMessage?: string): webDriver.promise.Promise<boolean> {
+                           optTimeout?: number, optMessage?: string): void {
     const timeoutToWait = optTimeout || global['implicitlyWait'] || undefined;
-    return browser.wait(protractor.ExpectedConditions.presenceOf(elem), timeoutToWait, optMessage).then(() => {
-      return elem.sendKeys(text).then(() => {
-        return elem.getAttribute('value').then((txt) => {
-          return txt === text;
-        });
-      });
+    browser.wait(protractor.ExpectedConditions.presenceOf(elem), timeoutToWait, optMessage).then(() => {
+      elem.sendKeys(text).then();
     });
   }
 
