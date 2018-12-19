@@ -13,12 +13,12 @@ export abstract class CommonScenario {
     this.testParameterFilePath = testParameterFilePath;
   }
 
-  abstract checkTestGoals(): void;
+  abstract async checkTestGoals(): Promise<void>;
 
   abstract performTest(): void;
 
   pageSetup(): void {
-    beforeAll(() => {
+    beforeAll(async () => {
       // Fill TestParameter object
       TestParameter.setConfFile(this.testParameterFilePath);
       TestParameter.initCommonParameters();
@@ -28,13 +28,12 @@ export abstract class CommonScenario {
       // Check that browser opened URL
       expect(browser.getTitle()).toBeDefined();
       const loginPOChecks = new LoginPOChecks();
-      loginPOChecks.isSignInLinkDisplayed().then((elementDisplayed) => {
-        expect(elementDisplayed).toBeTruthy('Sign In Link is not displayed, Login page was not loaded');
-      });
+      expect(await loginPOChecks.isSignInLinkDisplayed()).toBeTruthy(
+        'Sign In Link is not displayed, Login page was not loaded');
     });
   }
 
-  performLogin(): void {
+  async performLogin(): Promise<void> {
     const loginPOChecks = new LoginPOChecks();
     const loginPOActions = new LoginPOActions();
     const mainPOChecks = new MainPOChecks();
@@ -43,34 +42,32 @@ export abstract class CommonScenario {
     });
     // possible TestParameter.getUserId() if want to take credentials from TestProperty json
     loginPOActions.performLogin(TestParameter.environment.userID, TestParameter.environment.password);
-    mainPOChecks.isStartProjectLinkDisplayed().then((elementDisplayed) => {
-      expect(elementDisplayed).toBeTruthy('Start Project link is not displayed, login was not successful');
-    });
+    expect(await mainPOChecks.isStartProjectLinkDisplayed()).toBeTruthy(
+      'Start Project link is not displayed, login was not successful');
   }
 
-  performLogOut(): void {
+  async performLogOut(): Promise<void> {
     const mainPOActions = new MainPOActions();
     const loginPOChecks = new LoginPOChecks();
     mainPOActions.clickLogout();
-    loginPOChecks.isSignInLinkDisplayed().then((elementDisplayed) => {
-      expect(elementDisplayed).toBeTruthy('Sign In Link is not displayed, Login page was not loaded');
-    });
+    expect(await loginPOChecks.isSignInLinkDisplayed()).toBeTruthy(
+      'Sign In Link is not displayed, Login page was not loaded');
     browser.refresh();
   }
 
-  run(...args: any[]): void {
-    const testName = args[0];
-    describe(testName, () => {
+  run(testName: string): void {
+    describe(testName, async () => {
       this.pageSetup();
-      it('Perform Login actions', () => {
-        this.performLogin();
+
+      it('Perform Login actions', async () => {
+        await this.performLogin();
       });
 
       this.performTest();
 
-      it('Check test goals && Perform Logout actions', () => {
-        this.checkTestGoals();
-        this.performLogOut();
+      it('Check test goals && Perform Logout actions', async () => {
+        await this.checkTestGoals();
+        await this.performLogOut();
       });
     });
   }

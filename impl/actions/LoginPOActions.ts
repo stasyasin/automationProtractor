@@ -7,7 +7,7 @@ import { WaitUtils } from '../../fwk/utils/WaitUtils';
 
 const timeout = global['implicitlyWait'];
 
-export class LoginPOActions extends ActionUtils implements ILoginPOActions {
+export class LoginPOActions implements ILoginPOActions {
 
   performLogin(userId: string, password: string): void {
     this.clickSignInLink();

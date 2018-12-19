@@ -6,7 +6,7 @@ import { CommonPOLocators } from '../locators/CommonPOLocators';
 
 const timeout = global['implicitlyWait'];
 
-export class MainPOActions extends ActionUtils implements IMainPOActions {
+export class MainPOActions implements IMainPOActions {
 
   clickLogout(): void {
     ActionUtils.scrollAndClickElement(element.all(MainPOLocators.LOC_DROPDOWN_CARET_SPAN).last(),

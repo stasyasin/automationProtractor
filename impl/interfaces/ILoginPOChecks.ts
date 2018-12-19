@@ -6,6 +6,6 @@ export interface ILoginPOChecks {
    * This method check that Sign In Link is displayed
    * @return promise truthy or falsy
    */
-  isSignInLinkDisplayed(): webDriver.promise.Promise<boolean>;
+  isSignInLinkDisplayed(): Promise<boolean>;
 
 }
