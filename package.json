@@ -11,12 +11,15 @@
     "e2e-debug": "cd scripts && debug.sh",
     "e2e-report": "cd scripts && report.sh",
     "e2e": "cd scripts && build.sh && run.sh && report.sh",
+    "webdriver": "cd scripts && webdriver.sh",
+    "conc-run": "cd scripts && conc-run.sh",
     "webdriver:start": "webdriver-manager start --seleniumPort 4444",
     "webdriver:update": "webdriver-manager update",
-    "sleep": "sleep 10",
+    "sleep": "sleep 20",
     "prot:run": "cd scripts && protractor ../qaprotractor.conf.js",
     "e2e-conc": "concurrently \"npm run webdriver:update && npm run webdriver:start\" \"npm run sleep && npm run prot:run\" --kill-others",
-    "e2e-win": "cd scripts && npm run e2e-build && npm run e2e-conc"
+    "e2e-win": "cd scripts && npm run e2e-build && npm run e2e-conc",
+    "e2e-conc-run": "concurrently \"npm run webdriver\" \"npm run sleep && npm run conc-run\" --kill-others"
   },
   "devDependencies": {
     "protractor": "^5.2.2",
