@@ -37,7 +37,11 @@
     "xhr": "2.4.1",
     "moment": "^2.22.2",
     "concurrently": "^4.0.1",
-    "prettier": "^1.13.7"
+    "prettier": "^1.13.7",
+    "gulp": "^4.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-protractor": "^4.1.1",
+    "gulp-shell": "^0.6.5"
   },
   "description": "Automation Protractor framework",
   "prettier": {
