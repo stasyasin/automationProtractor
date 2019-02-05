@@ -6,20 +6,17 @@
   "private": true,
   "scripts": {
     "lint": "tslint -c tslint.json '**/**/*.ts'",
-    "e2e-build": "cd scripts && build.sh",
-    "e2e-run": "cd scripts && run.sh",
-    "e2e-debug": "cd scripts && debug.sh",
-    "e2e-report": "cd scripts && report.sh",
-    "e2e": "cd scripts && build.sh && run.sh && report.sh",
-    "webdriver": "cd scripts && webdriver.sh",
-    "conc-run": "cd scripts && conc-run.sh",
+    "sh-build": "cd scripts && build.sh",
+    "sh-run": "cd scripts && run.sh",
+    "sh-debug": "cd scripts && debug.sh",
+    "sh-report": "cd scripts && report.sh",
+    "sh-e2e": "cd scripts && build.sh && run.sh && report.sh",
     "webdriver:start": "webdriver-manager start --seleniumPort 4444",
     "webdriver:update": "webdriver-manager update",
-    "sleep": "sleep 20",
     "prot:run": "cd scripts && protractor ../qaprotractor.conf.js",
-    "e2e-conc": "concurrently \"npm run webdriver:update && npm run webdriver:start\" \"npm run sleep && npm run prot:run\" --kill-others",
-    "e2e-win": "cd scripts && npm run e2e-build && npm run e2e-conc",
-    "e2e-conc-run": "concurrently \"npm run webdriver\" \"npm run sleep && npm run conc-run\" --kill-others"
+    "sleep": "sleep 10",
+    "testrun": "concurrently \"npm run webdriver:start\" \"npm run sleep && npm run prot:run\" --kill-others",
+    "e2e": "npm run sh-build && npm run webdriver:update && npm run testrun && npm run sh-report"
   },
   "devDependencies": {
     "protractor": "^5.2.2",
