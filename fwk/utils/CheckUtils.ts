@@ -128,6 +128,21 @@ export class CheckUtils {
   }
 
   /**
+   * This method get CSSVaule of element property and return it as promise string
+   * @param elem
+   * @param property
+   * @return {Promise<string>}
+   */
+  static async getElementCSSValue(elem: ElementFinder, property: string): Promise<string> {
+    if (await this.isElementDisplayed(elem)) {
+      await this.goToWebElement(elem);
+      return await elem.getCssValue(property);
+    } else {
+      return null;
+    }
+  }
+
+  /**
    * This Method take Absolute view-location of the element.
    * @param elem
    * @return {wdpromise.Promise<ILocation>}
