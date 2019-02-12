@@ -37,9 +37,7 @@ export abstract class CommonScenario {
     const loginPOChecks = new LoginPOChecks();
     const loginPOActions = new LoginPOActions();
     const mainPOChecks = new MainPOChecks();
-    loginPOChecks.isSignInLinkDisplayed().then((elementDisplayed) => {
-      expect(elementDisplayed).toBeTruthy('Sign In Link is not displayed, Login page was not loaded');
-    });
+    expect(await loginPOChecks.isSignInLinkDisplayed()).toBeTruthy('Sign In Link is not displayed, Login page was not loaded');
     // possible TestParameter.getUserId() if want to take credentials from TestProperty json
     loginPOActions.performLogin(TestParameter.environment.userID, TestParameter.environment.password);
     expect(await mainPOChecks.isStartProjectLinkDisplayed()).toBeTruthy(
