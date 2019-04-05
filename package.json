@@ -13,7 +13,7 @@
     "sh-e2e": "cd scripts && build.sh && run.sh && report.sh",
     "webdriver:start": "webdriver-manager start --seleniumPort 4444",
     "webdriver:update": "webdriver-manager update",
-    "prot:run": "cd scripts && protractor ../qaprotractor.conf.js",
+    "prot:run": "protractor ./qaprotractor.conf.js",
     "sleep": "sleep 10",
     "testrun": "concurrently \"npm run webdriver:start\" \"npm run sleep && npm run prot:run\" --kill-others",
     "e2e": "npm run sh-build && npm run webdriver:update && npm run testrun && npm run sh-report"

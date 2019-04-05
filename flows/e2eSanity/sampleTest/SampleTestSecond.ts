@@ -7,10 +7,7 @@ import { CheckUtils } from '../../../fwk/utils/CheckUtils';
 export class SampleTestSecond extends CommonScenario {
 
   public static testName: string = 'SampleTestSecond';
-
-  constructor() {
-    super('../resources/e2eSanity/sampleTest/SampleTestSecond.json');
-  }
+  public static testParameterFilePath: string = './resources/e2eSanity/sampleTest/SampleTestSecond.json';
 
   performTest(): void {
     it('Search repository with name/owner from TestParameters', async () => {
@@ -29,4 +26,4 @@ export class SampleTestSecond extends CommonScenario {
 
 }
 
-new SampleTestSecond().run(SampleTestSecond.testName);
+new SampleTestSecond().run(SampleTestSecond.testName, SampleTestSecond.testParameterFilePath);

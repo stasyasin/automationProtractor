@@ -9,19 +9,14 @@ export abstract class CommonScenario {
 
   private readonly testParameterFilePath: string;
 
-  constructor(testParameterFilePath?: string) {
-    this.testParameterFilePath = testParameterFilePath;
-  }
-
   abstract async checkTestGoals(): Promise<void>;
 
   abstract performTest(): void;
 
-  pageSetup(): void {
+  pageSetup(testParameterFilePath: string): void {
     beforeAll(async () => {
       // Fill TestParameter object
-      TestParameter.setConfFile(this.testParameterFilePath);
-      TestParameter.initCommonParameters();
+      TestParameter.initCommonParameters(testParameterFilePath);
       // Open Start page using URL from EnvironmentList
       browser.ignoreSynchronization = true;
       browser.get(TestParameter.environment.url);
@@ -53,9 +48,9 @@ export abstract class CommonScenario {
     browser.refresh();
   }
 
-  run(testName: string): void {
+  run(testName: string, testParameterFilePath: string): void {
     describe(testName, async () => {
-      this.pageSetup();
+      this.pageSetup(testParameterFilePath);
 
       it('Perform Login actions', async () => {
         await this.performLogin();

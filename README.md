@@ -5,11 +5,11 @@
 ## How to run UI tests
 1. Select environment ( local, QA, PROD, etc) in resources/common/environmentList.json
 2. Select list of tests that you want to run in scenarioList.js
-3. **npm run e2e - concat command for e2e-build + e2e-run + e2e-report**
-4. npm run e2e-build - translation .ts files to .js files( into generated folder)
-5. npm run e2e-run - run all test from scenarioList.js with protractor configuration
-6. npm run e2e-report - to create global HTML report
-7. npm run e2e-debug - run test with the delay of 1000 seconds before closing shell window to see list of errors
+3. **npm run testrun - concat command for e2e-build + e2e-run + e2e-report**
+4. npm run sh-build - translation .ts files to .js files( into generated folder)
+5. npm run sh-run - run all test from scenarioList.js with protractor configuration
+6. npm run sh-report - to create global HTML report
+7. npm run sh-debug - run test with the delay of 1000 seconds before closing shell window to see list of errors
 
 **if "npm run e2e" doesn't work on your windows due to problem with multi shell cores run -> "npm run e2e-win"**
 
