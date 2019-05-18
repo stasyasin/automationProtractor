@@ -68,7 +68,7 @@ exports.config = {
 
       // Set Jasmine2THMLReporter
       jasmine.getEnv().addReporter(new Jasmine2HtmlReporter({
-        savePath: '.\/..\/reports\/Campaign-' + timeStamp + '\/',
+        savePath: '.\/reports\/Campaign-' + timeStamp + '\/',
         consolidate: false,
         cleanDestination: false,
         fileName: 'auto',

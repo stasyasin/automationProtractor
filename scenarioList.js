@@ -1,5 +1,5 @@
 var buildFilePathE2ESanity = function (scenarioName) {
-  return './generated/flows/e2eSanity/' + scenarioName + '.js'; // ../generated/flows/e2eSanity/' + scenarioName + '.js'; // move outside of scripts folder in case of gulp
+  return './generated/flows/e2eSanity/' + scenarioName + '.js';
 };
 
 exports.e2eSanity = [
