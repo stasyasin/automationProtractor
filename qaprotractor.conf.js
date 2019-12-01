@@ -13,6 +13,9 @@ exports.config = {
   shardTestFiles: true,
   maxInstances: 2,
   exclude: [],
+  plugins: [{
+    path: './mouse-plugin.js', // deactivate to not show mouse moves
+  }],
 
   framework: 'jasmine2',
 
