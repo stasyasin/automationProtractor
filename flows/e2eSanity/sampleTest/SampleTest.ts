@@ -11,10 +11,8 @@ export class SampleTest extends CommonScenario {
 
    performTest(): void {
     it('Search repository with name/owner from TestParameters', async () => {
-      const mainPOActions = new MainPOActions();
-      const repositoryPOChecks = new RepositoryPOChecks();
-      mainPOActions.searchRepository(TestParameter.getRepName(), TestParameter.getRepOwner());
-      expect(await repositoryPOChecks.isSummaryButtonDisplayed()).toBeTruthy(
+      this.mainPOActions.searchRepository(TestParameter.getRepName(), TestParameter.getRepOwner());
+      expect(await this.repositoryPOChecks.isSummaryButtonDisplayed()).toBeTruthy(
         'Summary Button is not displayed, repository was not found');
     });
   }

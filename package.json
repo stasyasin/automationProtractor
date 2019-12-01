@@ -19,7 +19,7 @@
     "e2e": "npm run sh-build && npm run webdriver:update && npm run testrun && npm run sh-report"
   },
   "devDependencies": {
-    "protractor": "^5.4.2",
+    "protractor": "latest",
     "typescript": "~2.6.2",
     "xmlhttprequest": "1.8.0",
     "tslint": "^5.6.0",

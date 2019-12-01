@@ -4,6 +4,7 @@ import { TestParameter } from '../common/TestParameter';
 import { LoginPOChecks } from '../impl/checks/LoginPOChecks';
 import { LoginPOActions } from '../impl/actions/LoginPOActions';
 import { MainPOActions } from '../impl/actions/MainPOActions';
+import { RepositoryPOChecks } from '../impl/checks/RepositoryPOChecks';
 
 export abstract class CommonScenario {
 
@@ -12,6 +13,12 @@ export abstract class CommonScenario {
   abstract async checkTestGoals(): Promise<void>;
 
   abstract performTest(): void;
+
+  loginPOChecks = new LoginPOChecks();
+  loginPOActions = new LoginPOActions();
+  mainPOChecks = new MainPOChecks();
+  mainPOActions = new MainPOActions();
+  repositoryPOChecks = new RepositoryPOChecks();
 
   pageSetup(testParameterFilePath: string): void {
     beforeAll(async () => {
@@ -22,28 +29,23 @@ export abstract class CommonScenario {
       browser.get(TestParameter.environment.url);
       // Check that browser opened URL
       expect(browser.getTitle()).toBeDefined();
-      const loginPOChecks = new LoginPOChecks();
-      expect(await loginPOChecks.isSignInLinkDisplayed()).toBeTruthy(
+
+      expect(await this.loginPOChecks.isSignInLinkDisplayed()).toBeTruthy(
         'Sign In Link is not displayed, Login page was not loaded');
     });
   }
 
   async performLogin(): Promise<void> {
-    const loginPOChecks = new LoginPOChecks();
-    const loginPOActions = new LoginPOActions();
-    const mainPOChecks = new MainPOChecks();
-    expect(await loginPOChecks.isSignInLinkDisplayed()).toBeTruthy('Sign In Link is not displayed, Login page was not loaded');
+    expect(await this.loginPOChecks.isSignInLinkDisplayed()).toBeTruthy('Sign In Link is not displayed, Login page was not loaded');
     // possible TestParameter.getUserId() if want to take credentials from TestProperty json
-    loginPOActions.performLogin(TestParameter.environment.userID, TestParameter.environment.password);
-    expect(await mainPOChecks.isStartProjectLinkDisplayed()).toBeTruthy(
+    this.loginPOActions.performLogin(TestParameter.environment.userID, TestParameter.environment.password);
+    expect(await this.mainPOChecks.isStartProjectLinkDisplayed()).toBeTruthy(
       'Start Project link is not displayed, login was not successful');
   }
 
   async performLogOut(): Promise<void> {
-    const mainPOActions = new MainPOActions();
-    const loginPOChecks = new LoginPOChecks();
-    mainPOActions.clickLogout();
-    expect(await loginPOChecks.isSignInLinkDisplayed()).toBeTruthy(
+    this.mainPOActions.clickLogout();
+    expect(await this.loginPOChecks.isSignInLinkDisplayed()).toBeTruthy(
       'Sign In Link is not displayed, Login page was not loaded');
     browser.refresh();
   }
