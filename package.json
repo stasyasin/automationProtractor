@@ -27,7 +27,7 @@
     "@types/node": "^8.10.20",
     "@types/selenium-webdriver": "2.53.36",
     "jasmine": "^2.8.0",
-    "eslint": "^0.22.1",
+    "eslint": "^4.18.2",
     "protractor-html-screenshot-reporter": "0.0.21",
     "protractor-http-mock": "~0.9.1",
     "protractor-jasmine2-html-reporter": "0.0.7",
