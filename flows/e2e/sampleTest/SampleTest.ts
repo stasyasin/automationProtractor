@@ -8,11 +8,12 @@ export class SampleTest extends CommonScenario {
   public static options: TestRunOptions = {
     testName: 'SampleTest',
     testProps: SAMPLE_TEST_PROP,
-    login: true
+    login: false
   };
 
   performTest(): void {
     it('Search repository with name/owner from TestParameters', async () => {
+      console.log('asd TestParameter.data', TestParameter.data);
       await this.mainPO.searchRepository(TestParameter.data.repositoryParameters.repName,
         TestParameter.data.repositoryParameters.repOwner);
       expect(await this.repositoryPO.isSummaryButtonDisplayed()).toBeTruthy(

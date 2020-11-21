@@ -6,7 +6,7 @@ const { generateGlobalReports } = require('./fwk/reportUtils/ReporterUtils.js');
 
 const scenarioList = require('./scenarioList');
 
-const specList = [].concat(scenarioList.e2eSanity);
+const specList = [].concat(scenarioList.e2e);
 
 
 exports.config = {
@@ -62,6 +62,10 @@ exports.config = {
   rootElement: 'body',
   allScriptsTimeout: 60 * 1000, // Increased timeout in case of browser issues
   onPrepare: function() {
+    // Set ts transpilation
+    require('ts-node').register({
+      project: require('path').join(__dirname, './tsconfig.json')
+    });
     browser.manage().timeouts().pageLoadTimeout(40 * 1000);
     global["implicitlyWait"] = 5 * 1000; // timeout to inspect DOM
     browser.manage().timeouts().implicitlyWait(global["implicitlyWait"]);

@@ -5,11 +5,10 @@ import { TestParameter } from '../../../fwk/testUtils/TestParameter';
 
 export class SampleTestSecond extends CommonScenario {
 
-  public static testName: string = 'SampleTestSecond';
   public static options: TestRunOptions = {
-    testName: 'SampleTest',
+    testName: 'SampleTestSecond',
     testProps: SAMPLE_TEST_SECOND_PROP,
-    login: true
+    login: false
   };
 
   performTest(): void {

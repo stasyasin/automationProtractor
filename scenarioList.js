@@ -1,10 +1,10 @@
-var buildFilePathE2ESanity = function (scenarioName) {
-  return './generated/flows/e2eSanity/' + scenarioName + '.js';
+var buildFilePathE2E = function (scenarioName) {
+  return './generated/flows/e2e/' + scenarioName + '.js';
 };
 
-exports.e2eSanity = [
+exports.e2e = [
   'sampleTest/SampleTest',
-  // 'sampleTest/SampleTestSecond',
-].map(buildFilePathE2ESanity);
+  'sampleTest/SampleTestSecond',
+].map(buildFilePathE2E);
 
 

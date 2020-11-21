@@ -22,14 +22,13 @@ export abstract class CommonScenario {
       // Check that browser opened URL
       expect(browser.getTitle()).toBeDefined();
 
-      expect(await this.loginPO.isSignInLinkDisplayed()).toBeTruthy(
+      expect(await this.loginPO.isHeaderMenuLinkDisplayed()).toBeTruthy(
         'Sign In Link is not displayed, Login page was not loaded');
     });
   }
 
   async performLogin(): Promise<void> {
-    expect(await this.loginPO.isSignInLinkDisplayed()).toBeTruthy('Sign In Link is not displayed, Login page was not loaded');
-    // possible TestParameter.getUserId() if want to take credentials from TestProperty json
+    // possible TestParameter.data... if want to take credentials from TestProperty
     await this.loginPO.performLogin(TestParameter.environment.userID, TestParameter.environment.password);
     expect(await this.mainPO.isStartProjectLinkDisplayed()).toBeTruthy(
       'Start Project link is not displayed, login was not successful');
@@ -37,9 +36,8 @@ export abstract class CommonScenario {
 
   async performLogOut(): Promise<void> {
     await this.mainPO.clickLogout();
-    expect(await this.loginPO.isSignInLinkDisplayed()).toBeTruthy(
+    expect(await this.loginPO.isHeaderMenuLinkDisplayed()).toBeTruthy(
       'Sign In Link is not displayed, Login page was not loaded');
-    browser.refresh();
   }
 
   run(options: TestRunOptions): void {
@@ -59,6 +57,8 @@ export abstract class CommonScenario {
           await this.performLogOut();
         });
       }
+
+      await browser.refresh();
     });
   }
 

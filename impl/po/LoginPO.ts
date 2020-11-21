@@ -8,7 +8,7 @@ import { getElement } from '../../fwk/utils/ElementUtils';
 
 export class LoginPO {
 
-  async isSignInLinkDisplayed(): Promise<boolean> {
+  async isHeaderMenuLinkDisplayed(): Promise<boolean> {
     await WaitUtils.waitForElementPresent(getElement(CommonPOLocators.LOC_HEADER_LINK, 2));
     return await CheckUtils.isElementDisplayed(getElement(CommonPOLocators.LOC_HEADER_LINK, 2));
   }
@@ -21,7 +21,7 @@ export class LoginPO {
   }
 
   async clickSignInLink(): Promise<void> {
-    await ActionUtils.scrollAndClickElement(getElement(CommonPOLocators.LOC_HEADER_LINK, 2), 'Click Sign in Link error');
+    await ActionUtils.scrollAndClickElement(getElement(CommonPOLocators.LOC_HEADER_LINK, 3), 'Click Sign in Link error');
     await WaitUtils.waitForElementPresent(getElement(LoginPOLocators.LOC_EMAIL_INPUT));
   }
 

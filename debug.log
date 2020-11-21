@@ -1,0 +1,20 @@
+[1121/144701.530:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\STASYA~1\AppData\Local\Temp\scoped_dir1880_460622389\Crashpad\attachments\8886ef73-2683-400c-9f88-eefb6a74fa59: The system cannot find the path specified. (0x3)
+[1121/144701.758:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1121/144701.758:ERROR:exception_snapshot_win.cc(99)] thread ID 15812 not found in process
+[1121/144701.759:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1121/144904.797:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\STASYA~1\AppData\Local\Temp\scoped_dir13724_949528213\Crashpad\attachments\f19e79e3-25a8-41f5-946d-ff0bd9f648dd: The system cannot find the path specified. (0x3)
+[1121/144905.193:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1121/144905.193:ERROR:exception_snapshot_win.cc(99)] thread ID 5152 not found in process
+[1121/144905.193:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1121/145141.019:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\STASYA~1\AppData\Local\Temp\scoped_dir12912_2102589942\Crashpad\attachments\d307e1f5-e289-499a-a130-af0f1bb9eb21: The system cannot find the path specified. (0x3)
+[1121/145141.202:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1121/145141.202:ERROR:exception_snapshot_win.cc(99)] thread ID 3548 not found in process
+[1121/145141.202:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1121/145301.782:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\STASYA~1\AppData\Local\Temp\scoped_dir15860_2144332822\Crashpad\attachments\4d38a349-f9f7-42d1-a48b-31f395c41149: The system cannot find the path specified. (0x3)
+[1121/145302.055:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1121/145302.055:ERROR:exception_snapshot_win.cc(99)] thread ID 6632 not found in process
+[1121/145302.056:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1121/150015.492:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\STASYA~1\AppData\Local\Temp\scoped_dir11100_635505519\Crashpad\attachments\3d896254-66ca-4882-900e-bb3770560356: The system cannot find the path specified. (0x3)
+[1121/150015.759:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1121/150015.759:ERROR:exception_snapshot_win.cc(99)] thread ID 10652 not found in process
+[1121/150015.759:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
