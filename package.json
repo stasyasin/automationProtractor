@@ -6,15 +6,15 @@
   "private": true,
   "scripts": {
     "lint": "tslint -c tslint.json '**/**/*.ts'",
-    "sh-e2e": "cd scripts && build.sh && run.sh && report.sh",
+    "e2e": "ng e2e",
+    "e2e:prod": "ng e2e --prod",
+    "e2e:dev": "ng e2e --dev-server-target",
+    "e2e:watch": "watch 'ng e2e --dev-server-target' src e2e --wait=1",
     "webdriver:start": "webdriver-manager start --seleniumPort 4444",
     "webdriver:update": "webdriver-manager update",
     "protractor": "npx protractor ./protractor.conf.js",
     "sleep": "sleep 10",
-    "e2e:build": "sh ./scripts/build.sh",
     "e2e:run": "concurrently \"npm run webdriver:start\" \"npm run sleep && npm run protractor\" --kill-others",
-    "e2e:report": "sh ./scripts/report.sh",
-    "e2e": "npm run sh-build && npm run webdriver:update && npm run testrun && npm run sh-report"
   },
   "devDependencies": {
     "protractor": "7.0.0",

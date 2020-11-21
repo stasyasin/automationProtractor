@@ -1,10 +1,11 @@
 var buildFilePathE2E = function (scenarioName) {
-  return './generated/flows/e2e/' + scenarioName + '.js';
+  // return './generated/flows/e2e/' + scenarioName + '.js';
+  return `./flows/e2e/**/*${scenarioName}.e2e-spec.ts`;
 };
 
 exports.e2e = [
-  'sampleTest/SampleTest',
-  'sampleTest/SampleTestSecond',
+  'SampleTest',
+  'SampleTestSecond',
 ].map(buildFilePathE2E);
 
 

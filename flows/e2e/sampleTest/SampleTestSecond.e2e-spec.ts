@@ -1,26 +1,24 @@
 import { CommonScenario } from '../../CommonScenario';
 import { TestRunOptions } from '../../../fwk/models/TestRunOptions';
-import { SAMPLE_TEST_PROP } from '../../../resources/e2e/sampleTest/SampleTestProp';
+import { SAMPLE_TEST_SECOND_PROP } from '../../../resources/e2e/sampleTest/SampleTestSecondProp';
 import { TestParameter } from '../../../fwk/testUtils/TestParameter';
 
-export class SampleTest extends CommonScenario {
+export class SampleTestSecondE2eSpec extends CommonScenario {
 
   public static options: TestRunOptions = {
-    testName: 'SampleTest',
-    testProps: SAMPLE_TEST_PROP,
+    testName: 'SampleTestSecond',
+    testProps: SAMPLE_TEST_SECOND_PROP,
     login: false
   };
 
   performTest(): void {
     it('Search repository with name/owner from TestParameters', async () => {
-      console.log('asd TestParameter.data', TestParameter.data);
       await this.mainPO.searchRepository(TestParameter.data.repositoryParameters.repName,
         TestParameter.data.repositoryParameters.repOwner);
       expect(await this.repositoryPO.isSummaryButtonDisplayed()).toBeTruthy(
         'Summary Button is not displayed, repository was not found');
     });
   }
-
 }
 
-new SampleTest().run(SampleTest.options);
+new SampleTestSecondE2eSpec().run(SampleTestSecondE2eSpec.options);
