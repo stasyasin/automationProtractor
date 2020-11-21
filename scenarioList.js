@@ -4,7 +4,7 @@ var buildFilePathE2ESanity = function (scenarioName) {
 
 exports.e2eSanity = [
   'sampleTest/SampleTest',
-  'sampleTest/SampleTestSecond',
+  // 'sampleTest/SampleTestSecond',
 ].map(buildFilePathE2ESanity);
 
 

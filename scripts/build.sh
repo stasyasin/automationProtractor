@@ -8,11 +8,8 @@ rm -rf ../generated
 # Generate js files from ts to generated folder
 echo "Generate js files from ts to generated folder"
 echo "###########################################"
-../node_modules/typescript/bin/tsc
+npx tsc -p ./tsconfig.json
 
-#Uncomment this command for debugging needs
-#echo "sleep 10"
-#echo "###########################################"
-#sleep 10
+
 
 

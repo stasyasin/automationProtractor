@@ -1,10 +1,12 @@
-var Jasmine2HtmlReporter = require('protractor-jasmine2-html-reporter');
-var moment = require('moment');
-var timeStamp = moment(new Date()).format('YYYY-MM-DD[T]HH[h]mm[m]ss[s]');
+const Jasmine2HtmlReporter = require('protractor-jasmine2-html-reporter');
+const { SpecReporter } = require('jasmine-spec-reporter');
+const moment = require('moment');
+const timeStamp = moment(new Date()).format('YYYY-MM-DD[T]HH[h]mm[m]ss[s]');
+const { generateGlobalReports } = require('./fwk/reportUtils/ReporterUtils.js');
 
-var scenarioList = require('./scenarioList');
+const scenarioList = require('./scenarioList');
 
-var specList = [].concat(scenarioList.e2eSanity);
+const specList = [].concat(scenarioList.e2eSanity);
 
 
 exports.config = {
@@ -14,7 +16,7 @@ exports.config = {
   maxInstances: 2,
   exclude: [],
   plugins: [{
-    path: './mouse-plugin.js', // deactivate to not show mouse moves
+    path: './mouse-plugin.js' // deactivate to not show mouse moves
   }],
 
   framework: 'jasmine2',
@@ -25,7 +27,7 @@ exports.config = {
     defaultTimeoutInterval: 90 * 1000,
     includeStackTrace: true,
     inVerbose: true,
-    realtimeFailure: true,
+    realtimeFailure: true
   },
 
   // To test in multiple browsers
@@ -51,7 +53,7 @@ exports.config = {
           'profile.managed_default_content_settings.notifications': 1
         }
       },
-      specs: specList,
+      specs: specList
     }
   ],
 
@@ -59,7 +61,7 @@ exports.config = {
 
   rootElement: 'body',
   allScriptsTimeout: 60 * 1000, // Increased timeout in case of browser issues
-  onPrepare: function () {
+  onPrepare: function() {
     browser.manage().timeouts().pageLoadTimeout(40 * 1000);
     global["implicitlyWait"] = 5 * 1000; // timeout to inspect DOM
     browser.manage().timeouts().implicitlyWait(global["implicitlyWait"]);
@@ -68,6 +70,13 @@ exports.config = {
 
       // you could use other properties here if you want, such as platform and version
       var browserName = config.capabilities.browserName;
+
+      // Set console reporter
+      jasmine.getEnv().addReporter(new SpecReporter({
+        spec: {
+          displayStacktrace: 'raw'
+        }
+      }));
 
       // Set Jasmine2THMLReporter
       jasmine.getEnv().addReporter(new Jasmine2HtmlReporter({
@@ -78,5 +87,8 @@ exports.config = {
         fileNameSeparator: '_'
       }));
     });
+  },
+  afterLaunch() {
+    generateGlobalReports();
   }
 };

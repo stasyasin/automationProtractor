@@ -1,69 +1,64 @@
 import { browser } from 'protractor';
-import { MainPOChecks } from '../impl/checks/MainPOChecks';
-import { TestParameter } from '../common/TestParameter';
-import { LoginPOChecks } from '../impl/checks/LoginPOChecks';
-import { LoginPOActions } from '../impl/actions/LoginPOActions';
-import { MainPOActions } from '../impl/actions/MainPOActions';
-import { RepositoryPOChecks } from '../impl/checks/RepositoryPOChecks';
+import { TestRunOptions } from '../fwk/models/TestRunOptions';
+import { LoginPO } from '../impl/po/LoginPO';
+import { MainPO } from '../impl/po/MainPO';
+import { RepositoryPO } from '../impl/po/RepositoryPO';
+import { TestParameter } from '../fwk/testUtils/TestParameter';
 
 export abstract class CommonScenario {
-
-  private readonly testParameterFilePath: string;
-
-  abstract async checkTestGoals(): Promise<void>;
+  loginPO = new LoginPO();
+  mainPO = new MainPO();
+  repositoryPO = new RepositoryPO();
 
   abstract performTest(): void;
 
-  loginPOChecks = new LoginPOChecks();
-  loginPOActions = new LoginPOActions();
-  mainPOChecks = new MainPOChecks();
-  mainPOActions = new MainPOActions();
-  repositoryPOChecks = new RepositoryPOChecks();
-
-  pageSetup(testParameterFilePath: string): void {
+  pageSetup(testProps?: any): void {
     beforeAll(async () => {
       // Fill TestParameter object
-      TestParameter.initCommonParameters(testParameterFilePath);
+      TestParameter.initCommonParameters(testProps);
       // Open Start page using URL from EnvironmentList
-      browser.ignoreSynchronization = true;
+      browser.waitForAngularEnabled(false);
       browser.get(TestParameter.environment.url);
       // Check that browser opened URL
       expect(browser.getTitle()).toBeDefined();
 
-      expect(await this.loginPOChecks.isSignInLinkDisplayed()).toBeTruthy(
+      expect(await this.loginPO.isSignInLinkDisplayed()).toBeTruthy(
         'Sign In Link is not displayed, Login page was not loaded');
     });
   }
 
   async performLogin(): Promise<void> {
-    expect(await this.loginPOChecks.isSignInLinkDisplayed()).toBeTruthy('Sign In Link is not displayed, Login page was not loaded');
+    expect(await this.loginPO.isSignInLinkDisplayed()).toBeTruthy('Sign In Link is not displayed, Login page was not loaded');
     // possible TestParameter.getUserId() if want to take credentials from TestProperty json
-    this.loginPOActions.performLogin(TestParameter.environment.userID, TestParameter.environment.password);
-    expect(await this.mainPOChecks.isStartProjectLinkDisplayed()).toBeTruthy(
+    await this.loginPO.performLogin(TestParameter.environment.userID, TestParameter.environment.password);
+    expect(await this.mainPO.isStartProjectLinkDisplayed()).toBeTruthy(
       'Start Project link is not displayed, login was not successful');
   }
 
   async performLogOut(): Promise<void> {
-    this.mainPOActions.clickLogout();
-    expect(await this.loginPOChecks.isSignInLinkDisplayed()).toBeTruthy(
+    await this.mainPO.clickLogout();
+    expect(await this.loginPO.isSignInLinkDisplayed()).toBeTruthy(
       'Sign In Link is not displayed, Login page was not loaded');
     browser.refresh();
   }
 
-  run(testName: string, testParameterFilePath: string): void {
-    describe(testName, async () => {
-      this.pageSetup(testParameterFilePath);
+  run(options: TestRunOptions): void {
+    describe(options.testName, async () => {
+      this.pageSetup(options.testProps);
 
-      it('Perform Login actions', async () => {
-        await this.performLogin();
-      });
+      if (options.login) {
+        it('Perform Login actions', async () => {
+          await this.performLogin();
+        });
+      }
 
       this.performTest();
 
-      it('Check test goals && Perform Logout actions', async () => {
-        await this.checkTestGoals();
-        await this.performLogOut();
-      });
+      if (options.login) {
+        it('Check test goals && Perform Logout actions', async () => {
+          await this.performLogOut();
+        });
+      }
     });
   }
 
