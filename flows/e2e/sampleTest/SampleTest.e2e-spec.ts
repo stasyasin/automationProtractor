@@ -13,7 +13,6 @@ export class SampleTestE2eSpec extends CommonScenario {
 
   performTest(): void {
     it('Search repository with name/owner from TestParameters', async () => {
-      console.log('asd TestParameter.data', TestParameter.data);
       await this.mainPO.searchRepository(TestParameter.data.repositoryParameters.repName,
         TestParameter.data.repositoryParameters.repOwner);
       expect(await this.repositoryPO.isSummaryButtonDisplayed()).toBeTruthy(
