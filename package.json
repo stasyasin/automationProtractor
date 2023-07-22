@@ -14,7 +14,7 @@
     "webdriver:update": "webdriver-manager update",
     "protractor": "npx protractor ./protractor.conf.js",
     "sleep": "sleep 10",
-    "e2e:run": "concurrently \"npm run webdriver:start\" \"npm run sleep && npm run protractor\" --kill-others",
+    "e2e:run": "concurrently \"npm run webdriver:start\" \"npm run sleep && npm run protractor\" --kill-others"
   },
   "devDependencies": {
     "protractor": "7.0.0",
