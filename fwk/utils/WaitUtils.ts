@@ -45,10 +45,10 @@ export async function wait(timeoutSec: number): Promise<void> {
 
 /**
  * This function sleep all program execution instead of just sleeping browser.
- * @param {number} second
+ * @param {number} timeoutSec
  */
-export async function waitJS(second: number): Promise<void> {
-  await setTimeout(() => {}, second);
+export async function waitJS(timeoutSec: number): Promise<void> {
+  await setTimeout(() => {}, timeoutSec* 1000);
 }
 
 /**
