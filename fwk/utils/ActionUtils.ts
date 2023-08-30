@@ -15,7 +15,7 @@ export async function scrollAndClickElement(elem: ElementFinder, optMessage?: st
   if (await elem.isPresent()) {
     await CheckUtils.goToWebElement(elem);
   }
-  await browser.wait(protractor.ExpectedConditions.elementToBeClickable(elem), WaitUtils.getTimeout(optTimeout), optMessage);
+  await browser.wait(protractor.ExpectedConditions.elementToBeClickable(elem), getTimeout(optTimeout), optMessage);
   await elem.click();
 }
 
@@ -39,7 +39,7 @@ export async function scrollAndDoubleClickElement(elem: ElementFinder, optMessag
   if (await elem.isPresent()) {
     await CheckUtils.goToWebElement(elem);
   }
-  await browser.wait(protractor.ExpectedConditions.elementToBeClickable(elem), WaitUtils.getTimeout(optTimeout), optMessage);
+  await browser.wait(protractor.ExpectedConditions.elementToBeClickable(elem), getTimeout(optTimeout), optMessage);
   await browser.actions()
     .doubleClick(elem.getWebElement())
     .perform();
@@ -166,7 +166,7 @@ export async function fillElementInput(elem: ElementFinder, text: string,
   if (await elem.isPresent()) {
     await CheckUtils.goToWebElement(elem);
   }
-  await browser.wait(protractor.ExpectedConditions.presenceOf(elem), WaitUtils.getTimeout(optTimeout), optMessage);
+  await browser.wait(protractor.ExpectedConditions.presenceOf(elem), getTimeout(optTimeout), optMessage);
   await elem.clear();
   await elem.sendKeys(text);
 }
@@ -184,7 +184,7 @@ export async function fillElementSelect(elem: ElementFinder, text: string,
   if (await elem.isPresent()) {
     await CheckUtils.goToWebElement(elem);
   }
-  await browser.wait(protractor.ExpectedConditions.presenceOf(elem), WaitUtils.getTimeout(optTimeout), optMessage);
+  await browser.wait(protractor.ExpectedConditions.presenceOf(elem), getTimeout(optTimeout), optMessage);
   await elem.sendKeys(text);
 }
 
@@ -207,7 +207,7 @@ export async function uploadFile(elem: ElementFinder, fileToUpload: string): Pro
     ' arguments[0].style.width = "1px";  arguments[0].style.opacity = 1', elem.getWebElement());
   await elem.sendKeys(absolutePath);
 
-  //Take a breath
+  // Take a breath
   await WaitUtils.wait(1);
 }
 
@@ -221,4 +221,15 @@ export async function switchToWindow(index: number): Promise<void> {
     await browser.switchTo().window(allWindows[index]).then();
   }
   await WaitUtils.wait(1);
+}
+
+/**
+ * function to get default timeout for all action methods. It could be:
+ *  - optTimeout sent by a function
+ *  - global implicitlyWait ( 5000 )
+ *  - or global globalWaitTimeout from WaitUtils
+ * @param timeoutSec
+ */
+function getTimeout(optTimeout?: number) {
+  return optTimeout * 1000 || global['implicitlyWait'] || WaitUtils.getTimeout();
 }
