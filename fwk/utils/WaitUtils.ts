@@ -44,7 +44,7 @@ export async function wait(timeoutSec: number): Promise<void> {
 }
 
 /**
- * This function sleep all program execution instead of just sleeping browser.
+ * This function sleeps all program execution instead of just sleeping browser.
  * @param {number} timeoutSec
  */
 export async function waitJS(timeoutSec: number): Promise<void> {
@@ -55,6 +55,6 @@ export async function waitJS(timeoutSec: number): Promise<void> {
  * function to count timeout in milliseconds
  * @param timeoutSec
  */
-function getTimeout(timeoutSec?: number) {
+export function getTimeout(timeoutSec?: number) {
   return timeoutSec * 1000 || globalWaitTimeout;
 }
