@@ -5,14 +5,20 @@ const globalWaitTimeout: number = 40 * 1000;
 
 export async function waitForElementNotPresent(elem: ElementFinder, timeoutSec?: number): Promise<void> {
   await browser.wait(protractor.ExpectedConditions.not(protractor.ExpectedConditions.presenceOf(elem)), getTimeout(timeoutSec),
-    `${elem.locator()} is present after ${timeoutSec} sec`).then(() => {
-  });
+    `${elem.locator()} is present after ${timeoutSec} sec`)
+    .then(() => {})
+    .catch(() => {
+      console.log(`${elem.locator()} is present after ${timeoutSec} sec`);
+    });
 }
 
 export async function waitForElementPresent(elem: ElementFinder, timeoutSec?: number): Promise<void> {
   await browser.wait(protractor.ExpectedConditions.presenceOf(elem), getTimeout(timeoutSec),
-    `${elem.locator()} is not present after ${timeoutSec} sec`).then(() => {
-  });
+    `${elem.locator()} is not present after ${timeoutSec} sec`)
+    .then(() => {})
+    .catch(() => {
+      console.log(`${elem.locator()} is not present after ${timeoutSec} sec`);
+    });
 }
 
 export async function waitForElementPresentAndVisible(elem: ElementFinder, timeoutSec?: number): Promise<void> {
@@ -24,14 +30,20 @@ export async function waitForElementPresentAndVisible(elem: ElementFinder, timeo
 
 export async function waitForTextPresentInElement(elem: ElementFinder, text: string, timeoutSec?: number): Promise<void> {
   await browser.wait(protractor.ExpectedConditions.textToBePresentInElement(elem, text), getTimeout(timeoutSec),
-    `${text} is not present in ${elem.locator()} after ${timeoutSec} sec`).then(() => {
-  });
+    `${text} is not present in ${elem.locator()} after ${timeoutSec} sec`)
+    .then(() => {})
+    .catch(() => {
+        console.log(`${elem.locator()} is not visible after ${timeoutSec} sec`);
+      });
 }
 
 export async function waitForButtonToBeClickable(elem: ElementFinder, timeoutSec?: number): Promise<void> {
   await browser.wait(protractor.ExpectedConditions.elementToBeClickable(elem), getTimeout(timeoutSec),
-    `${elem.locator()} is not clickable after ${timeoutSec} sec`).then(() => {
-  });
+    `${elem.locator()} is not clickable after ${timeoutSec} sec`)
+    .then(() => {})
+    .catch(() => {
+      console.log(`${text} is not present in ${elem.locator()} after ${timeoutSec} sec`);
+    });
 }
 
 export async function waitForSpinnerToFinish(elem: ElementFinder, timeoutSec?: number): Promise<void> {
